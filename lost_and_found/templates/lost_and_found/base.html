@@ -1,11 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>{% block title %}Поиск домашних животных{% endblock %}</title>
+
+    <link href="{% static 'lost_and_found/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lost_and_found/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'lost_and_found/css/main.css' %}" rel="stylesheet">
 </head>
-<body style="font-family: Arial; max-width: 800px; margin: 0 auto;">
-    <h2>Сайт поиска животных</h2>
-    {% block content %}
-    {% endblock %}
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'lost_and_found:listing_list' %}">
+                <i class="bi bi-house-heart"></i> Поиск животных
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="#">Войти</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <script src="{% static 'lost_and_found/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

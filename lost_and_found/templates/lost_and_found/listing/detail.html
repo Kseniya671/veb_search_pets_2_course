@@ -3,11 +3,36 @@
 {% block title %}{{ listing.animal }}{% endblock %}
 
 {% block content %}
-    <h1>{{ listing.get_listing_type_display }}: {{ listing.animal }}</h1>
-    <p>Город: {{ listing.location }}</p>
-    
-    <!-- Фильтр linebreaks, как в книге -->
-    <p>{{ listing.description|linebreaks }}</p>
-    
-    <a href="{% url 'lost_and_found:listing_list' %}">Назад</a>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        {{ listing.get_listing_type_display }}: {{ listing.animal }}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="fs-5 text-muted">
+                        <i class="bi bi-geo-alt-fill"></i> Город: {{ listing.location }}
+                    </p>
+                    
+                    <hr>
+                    
+                    <h5>Описание:</h5>
+                    <p>{{ listing.description|linebreaks }}</p>
+                    
+                    <hr>
+                    
+                    <p class="text-muted small">
+                        <i class="bi bi-calendar-event"></i> Дата создания: {{ listing.created_at|date:"d M Y, H:i" }}
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <a href="{% url 'lost_and_found:listing_list' %}" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Назад к ленте
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

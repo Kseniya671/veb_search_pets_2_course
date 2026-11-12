@@ -1,21 +1,33 @@
 {% extends "lost_and_found/base.html" %}
 
 {% block content %}
-    <h1>Лента объявлений</h1>
+    <h1 class="mb-4">Лента объявлений</h1>
     
-    {% for listing in listings %}
-        <div>
-            <!-- Ссылка формируется динамически по ID объявления -->
-            <h2><a href="{% url 'lost_and_found:listing_detail' listing.id %}">
-                {{ listing.get_listing_type_display }}: {{ listing.animal }}
-            </a></h2>
-            
-            <p>Дата: {{ listing.created_at|date:"d M Y" }}</p>
-            
-            <!-- Фильтр truncatewords:30, как в книге -->
-            <p>{{ listing.description|truncatewords:30 }}</p>
-        </div>
-    {% empty %}
-        <p>Объявлений пока нет.</p>
-    {% endfor %}
+    <div class="row">
+        {% for listing in listings %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'lost_and_found:listing_detail' listing.id %}" class="text-decoration-none">
+                                {{ listing.get_listing_type_display }}: {{ listing.animal }}
+                            </a>
+                        </h5>
+                        <p class="card-text text-muted small">
+                            <i class="bi bi-geo-alt"></i> {{ listing.location }} | 
+                            <i class="bi bi-calendar"></i> {{ listing.created_at|date:"d M Y" }}
+                        </p>
+                        <p class="card-text">{{ listing.description|truncatewords:15 }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="{% url 'lost_and_found:listing_detail' listing.id %}" class="btn btn-primary btn-sm w-100">
+                            Подробнее <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="alert alert-info">Объявлений пока нет.</div>
+        {% endfor %}
+    </div>
 {% endblock %}
