@@ -1,0 +1,13 @@
+{% extends "lost_and_found/base.html" %}
+
+{% block title %}{{ listing.animal }}{% endblock %}
+
+{% block content %}
+    <h1>{{ listing.get_listing_type_display }}: {{ listing.animal }}</h1>
+    <p>Город: {{ listing.location }}</p>
+    
+    <!-- Фильтр linebreaks, как в книге -->
+    <p>{{ listing.description|linebreaks }}</p>
+    
+    <a href="{% url 'lost_and_found:listing_list' %}">Назад</a>
+{% endblock %}

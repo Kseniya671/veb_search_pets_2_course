@@ -1,0 +1,21 @@
+{% extends "lost_and_found/base.html" %}
+
+{% block content %}
+    <h1>Лента объявлений</h1>
+    
+    {% for listing in listings %}
+        <div>
+            <!-- Ссылка формируется динамически по ID объявления -->
+            <h2><a href="{% url 'lost_and_found:listing_detail' listing.id %}">
+                {{ listing.get_listing_type_display }}: {{ listing.animal }}
+            </a></h2>
+            
+            <p>Дата: {{ listing.created_at|date:"d M Y" }}</p>
+            
+            <!-- Фильтр truncatewords:30, как в книге -->
+            <p>{{ listing.description|truncatewords:30 }}</p>
+        </div>
+    {% empty %}
+        <p>Объявлений пока нет.</p>
+    {% endfor %}
+{% endblock %}
