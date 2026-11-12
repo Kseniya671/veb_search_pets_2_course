@@ -133,8 +133,7 @@ class Listing(models.Model):
 
 class ListingImage(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='images', verbose_name="Объявление")
-    file_path = models.CharField(max_length=255, verbose_name="Путь к файлу")
-    file_url = models.CharField(max_length=255, blank=True, verbose_name="URL файла")
+    image = models.ImageField(upload_to='listings/', null=True, blank=True, verbose_name="Фотография")
     is_primary = models.BooleanField(default=False, verbose_name="Главное фото")
     sort_order = models.IntegerField(default=0, verbose_name="Порядок сортировки")
     uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата загрузки")
